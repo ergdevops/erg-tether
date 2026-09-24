@@ -1,0 +1,27 @@
+ErgTether
+Copyright 2026 Arghaya Mondal
+
+This product includes software developed by Arghaya Mondal.
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file.
+
+--------------------------------------------------------------------------------
+Protocol references and trademarks
+--------------------------------------------------------------------------------
+
+This product implements Remote NDIS (RNDIS), a protocol originally specified by
+Microsoft Corporation. "RNDIS" is used here descriptively, to name the protocol
+implemented. This project is not affiliated with, endorsed by, or sponsored by
+Microsoft, Google, Apple, or any device manufacturer. Android is a trademark of
+Google LLC; macOS is a trademark of Apple Inc.
+
+The Linux kernel drivers rndis_host.c, cdc_ether.c, u_ether.c and f_rndis.c
+(GPL-2.0) were consulted as a reference for protocol behaviour -- message
+layouts, constants, and documented device quirks. No code from those files is
+included in this project. Protocol facts of that kind are interface
+information, not copyrightable expression.
+
+If kernel code is ever copied into this tree, the GPL applies to the result and
+this notice must change accordingly. Contributors: please do not paste kernel
+source here. Describe the behaviour and implement it independently, as the
+existing code does.

@@ -1,0 +1,26 @@
+#!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
+# Register the launchd jobs once the payload is in place.
+#
+# The daemon is a system job. The menu bar app is an agent in /Library rather
+# than a home directory, so it loads for whoever logs in instead of only the
+# user who happened to run the installer.
+set -uo pipefail
+
+DAEMON=com.ergtether.daemon
+AGENT=com.ergtether.bar
+
+# bootstrap fails on an already-loaded label, so clear any previous version.
+launchctl bootout "system/$DAEMON" 2>/dev/null || true
+launchctl bootstrap system "/Library/LaunchDaemons/$DAEMON.plist" || true
+
+# Agents live in a GUI session. The installer runs as root, which has no GUI
+# domain, so target the console user's.
+CONSOLE_USER=$(stat -f %Su /dev/console 2>/dev/null || echo "")
+if [ -n "$CONSOLE_USER" ] && [ "$CONSOLE_USER" != "root" ]; then
+    CONSOLE_UID=$(id -u "$CONSOLE_USER")
+    launchctl bootout   "gui/$CONSOLE_UID/$AGENT" 2>/dev/null || true
+    launchctl bootstrap "gui/$CONSOLE_UID" "/Library/LaunchAgents/$AGENT.plist" || true
+fi
+
+exit 0

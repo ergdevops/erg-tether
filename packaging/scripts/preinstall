@@ -1,0 +1,7 @@
+#!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
+# Stop a running instance before its binary is replaced underneath it.
+set -uo pipefail
+/usr/local/libexec/erg-tetherd -k 2>/dev/null || true
+launchctl bootout system/com.ergtether.daemon 2>/dev/null || true
+exit 0
