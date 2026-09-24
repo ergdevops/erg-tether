@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ergtether.daemon</string>
+
+  <!-- Watch mode: sit idle until an Android RNDIS gadget appears, connect, and
+       tear down again when it is unplugged. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/libexec/erg-tetherd</string>
+    <string>-w</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Restart on a crash, but honour a clean exit so `erg-tetherd -k` and the
+       menu bar's Stop actually stop it. -->
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+
+  <key>StandardErrorPath</key>
+  <string>/var/log/erg-tether.log</string>
+  <key>StandardOutPath</key>
+  <string>/var/log/erg-tether.log</string>
+</dict>
+</plist>

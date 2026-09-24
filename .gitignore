@@ -1,0 +1,6 @@
+# build output
+*.o
+erg-tetherd
+ergtetherbar
+ErgTether.app/
+dist/
